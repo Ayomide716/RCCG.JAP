@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact">
+  <div class="max-w-7xl mx-auto px-4 py-8 md:py-16">
+    <h1 class="font-serif text-3xl md:text-4xl text-church-brown mb-6 md:mb-8">Contact Us</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      <div>
+        <form 
+          id="contact-form" 
+          class="space-y-4 md:space-y-6"
+          aria-label="Contact form"
+        >
+          <div>
+            <label for="name" class="block text-gray-700 mb-2">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="w-full px-3 md:px-4 py-2 border border-gray-300 rounded-lg focus:ring-church-gold focus:border-church-gold"
+              required
+              minlength="2"
+              aria-describedby="name-error"
+            />
+            <p id="name-error" class="text-red-600 text-sm mt-1 hidden"></p>
+          </div>
+          
+          <div>
+            <label for="email" class="block text-gray-700 mb-2">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="w-full px-3 md:px-4 py-2 border border-gray-300 rounded-lg focus:ring-church-gold focus:border-church-gold"
+              required
+              aria-describedby="email-error"
+            />
+            <p id="email-error" class="text-red-600 text-sm mt-1 hidden"></p>
+          </div>
+          
+          <div>
+            <label for="message" class="block text-gray-700 mb-2">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              class="w-full px-3 md:px-4 py-2 border border-gray-300 rounded-lg focus:ring-church-gold focus:border-church-gold"
+              required
+              minlength="10"
+              aria-describedby="message-error"
+            ></textarea>
+            <p id="message-error" class="text-red-600 text-sm mt-1 hidden"></p>
+          </div>
+          
+          <div id="form-status" class="hidden">
+            <p class="text-green-600"></p>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full md:w-auto bg-church-brown text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={false}
+          >
+            <span class="inline-block">Send Message</span>
+            <span class="hidden">Sending...</span>
+          </button>
+        </form>
+
+        <script>
+          const form = document.getElementById('contact-form');
+          const formStatus = document.getElementById('form-status');
+          const submitButton = form?.querySelector('button[type="submit"]');
+
+          form?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Reset errors
+            document.querySelectorAll('[id$="-error"]').forEach(el => el.classList.add('hidden'));
+            
+            // Validate form
+            const formData = new FormData(form);
+            let isValid = true;
+            
+            if (formData.get('name').length < 2) {
+              document.getElementById('name-error').textContent = 'Name must be at least 2 characters';
+              document.getElementById('name-error').classList.remove('hidden');
+              isValid = false;
+            }
+            
+            if (!formData.get('email').match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+              document.getElementById('email-error').textContent = 'Please enter a valid email address';
+              document.getElementById('email-error').classList.remove('hidden');
+              isValid = false;
+            }
+            
+            if (formData.get('message').length < 10) {
+              document.getElementById('message-error').textContent = 'Message must be at least 10 characters';
+              document.getElementById('message-error').classList.remove('hidden');
+              isValid = false;
+            }
+            
+            if (!isValid) return;
+
+            // Show loading state
+            if (submitButton) {
+              submitButton.disabled = true;
+              submitButton.querySelector('span:first-child').classList.add('hidden');
+              submitButton.querySelector('span:last-child').classList.remove('hidden');
+            }
+
+            try {
+              // Simulate form submission
+              await new Promise(resolve => setTimeout(resolve, 1000));
+              
+              // Show success message
+              formStatus.classList.remove('hidden');
+              formStatus.querySelector('p').textContent = 'Thank you for your message. We will get back to you soon.';
+              form.reset();
+            } catch (error) {
+              formStatus.classList.remove('hidden');
+              formStatus.querySelector('p').textContent = 'An error occurred. Please try again later.';
+              formStatus.querySelector('p').classList.remove('text-green-600');
+              formStatus.querySelector('p').classList.add('text-red-600');
+            } finally {
+              if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.querySelector('span:first-child').classList.remove('hidden');
+                submitButton.querySelector('span:last-child').classList.add('hidden');
+              }
+            }
+          });
+        </script>
+      </div>
+      
+      <div class="space-y-6 md:space-y-8">
+        <div class="bg-white p-4 md:p-6 rounded-lg shadow-md">
+          <h2 class="font-serif text-xl md:text-2xl text-church-brown mb-4">Church Information</h2>
+          <div class="space-y-3 md:space-y-4">
+            <p class="text-gray-700">
+              <strong>Address:</strong><br />
+              123 Church Street<br />
+              Anytown, ST 12345
+            </p>
+            <p class="text-gray-700">
+              <strong>Phone:</strong><br />
+              <a href="tel:+15551234567" class="hover:text-church-gold transition-colors duration-200">(555) 123-4567</a>
+            </p>
+            <p class="text-gray-700">
+              <strong>Email:</strong><br />
+              <a href="mailto:info@gracechurch.com" class="hover:text-church-gold transition-colors duration-200">info@gracechurch.com</a>
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white p-4 md:p-6 rounded-lg shadow-md">
+          <h2 class="font-serif text-xl md:text-2xl text-church-brown mb-4">Office Hours</h2>
+          <div class="space-y-2 text-gray-700">
+            <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+            <p>Saturday: Closed</p>
+            <p>Sunday: 8:00 AM - 1:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

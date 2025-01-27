@@ -1,0 +1,89 @@
+---
+const links = [
+  { href: '/', text: 'Home' },
+  { href: '/about', text: 'About' },
+  { href: '/services', text: 'Services' },
+  { href: '/events', text: 'Events' },
+  { href: '/sermons', text: 'Sermons' },
+  { href: '/contact', text: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="bg-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex-shrink-0">
+        <a href="/" class="font-serif text-2xl text-church-brown hover:text-church-gold transition-colors duration-200">Grace Community Church</a>
+      </div>
+      
+      <button 
+        id="mobile-menu-button" 
+        class="md:hidden text-church-brown hover:text-church-gold transition-colors duration-200"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-center space-x-8">
+          {links.map(link => (
+            <a
+              href={link.href}
+              class:list={[
+                "text-church-brown hover:text-church-gold transition-colors duration-200",
+                { "border-b-2 border-church-gold": currentPath === link.href }
+              ]}
+              aria-current={currentPath === link.href ? "page" : undefined}
+            >
+              {link.text}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div 
+      id="mobile-menu" 
+      class="hidden md:hidden transition-all duration-300 ease-in-out opacity-0 -translate-y-2"
+    >
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        {links.map(link => (
+          <a
+            href={link.href}
+            class:list={[
+              "block px-3 py-2 text-church-brown hover:text-church-gold transition-colors duration-200",
+              { "bg-gray-50 border-l-4 border-church-gold": currentPath === link.href }
+            ]}
+            aria-current={currentPath === link.href ? "page" : undefined}
+          >
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+      mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+      
+      mobileMenu.classList.toggle('hidden');
+      // Wait a frame to ensure the display change has taken effect
+      requestAnimationFrame(() => {
+        mobileMenu.classList.toggle('opacity-0');
+        mobileMenu.classList.toggle('-translate-y-2');
+      });
+    });
+  }
+</script>

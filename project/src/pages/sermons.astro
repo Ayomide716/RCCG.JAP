@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sermons = [
+  {
+    title: "Walking in Faith",
+    date: "May 5, 2024",
+    speaker: "Pastor John Smith",
+    passage: "Hebrews 11:1-6",
+    audioUrl: "/sermons/walking-in-faith.mp3",
+    thumbnail: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65",
+    description: "Exploring the foundations of faith and how to walk confidently in God's promises."
+  },
+  {
+    title: "The Power of Prayer",
+    date: "April 28, 2024",
+    speaker: "Pastor John Smith",
+    passage: "James 5:13-18",
+    audioUrl: "/sermons/power-of-prayer.mp3",
+    thumbnail: "https://images.unsplash.com/photo-1514939775307-d55c39c0a0a4",
+    description: "Understanding the transformative power of prayer in our daily lives."
+  },
+  {
+    title: "Living with Purpose",
+    date: "April 21, 2024",
+    speaker: "Pastor John Smith",
+    passage: "Ephesians 2:10",
+    audioUrl: "/sermons/living-with-purpose.mp3",
+    thumbnail: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94",
+    description: "Discovering God's purpose for your life and living it out faithfully."
+  }
+];
+---
+
+<Layout title="Sermons">
+  <div class="max-w-7xl mx-auto px-4 py-16">
+    <h1 class="font-serif text-4xl text-church-brown mb-8">Recent Sermons</h1>
+    
+    <div class="space-y-8">
+      {sermons.map(sermon => (
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
+              <h2 class="font-serif text-2xl text-church-brown mb-2">{sermon.title}</h2>
+              <p class="text-church-gold mb-2">{sermon.date}</p>
+              <p class="text-gray-700 mb-2">Speaker: {sermon.speaker}</p>
+              <p class="text-gray-700 mb-4">Scripture: {sermon.passage}</p>
+              <p class="text-gray-600 mb-4">{sermon.description}</p>
+              
+              <div class="space-y-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <audio
+                    controls
+                    class="w-full"
+                    preload="none"
+                    aria-label={`Sermon: ${sermon.title}`}
+                  >
+                    <source src={sermon.audioUrl} type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                  <div class="flex items-center justify-between mt-2">
+                    <p class="text-sm text-gray-600">
+                      Audio will be available after the service
+                    </p>
+                    <button 
+                      class="text-church-brown hover:text-church-gold transition-colors duration-200"
+                      aria-label={`Download ${sermon.title} sermon`}
+                      onclick="alert('Sermon audio will be available for download after the service.')"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <img
+                src={sermon.thumbnail}
+                alt=""
+                class="w-full h-48 object-cover rounded-lg"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

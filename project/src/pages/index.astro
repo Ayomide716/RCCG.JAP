@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Welcome">
+  <div class="relative h-[600px]">
+    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1438032005730-c779502df39b')] bg-cover bg-center">
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+    <div class="relative h-full flex items-center justify-center text-center text-white px-4">
+      <div>
+        <h1 class="font-serif text-5xl md:text-6xl mb-4">Welcome to Grace Community Church</h1>
+        <p class="text-xl md:text-2xl mb-8">Join us in worship and fellowship</p>
+        <a href="/about" class="bg-church-gold text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+          Learn More
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-serif text-4xl text-center text-church-brown mb-12">Upcoming Events</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="font-serif text-2xl mb-2">Sunday Service</h3>
+          <p class="text-gray-600 mb-4">Join us every Sunday at 9:00 AM and 11:00 AM for worship.</p>
+          <a href="/services" class="text-church-brown hover:text-church-gold">Learn more →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="font-serif text-2xl mb-2">Bible Study</h3>
+          <p class="text-gray-600 mb-4">Wednesday nights at 7:00 PM. Dive deep into God's word.</p>
+          <a href="/events" class="text-church-brown hover:text-church-gold">Learn more →</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="font-serif text-2xl mb-2">Community Outreach</h3>
+          <p class="text-gray-600 mb-4">Monthly community service projects and outreach programs.</p>
+          <a href="/events" class="text-church-brown hover:text-church-gold">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-church-brown text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="font-serif text-4xl mb-8">Join Our Community</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        We're a welcoming community of believers dedicated to serving God and our neighbors.
+      </p>
+      <a href="/contact" class="inline-block bg-church-gold px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+        Contact Us
+      </a>
+    </div>
+  </section>
+</Layout>

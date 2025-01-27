@@ -1,0 +1,32 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-church-brown text-white py-8">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="font-serif text-xl mb-4">Service Times</h3>
+        <p>Sunday Worship: 9:00 AM & 11:00 AM</p>
+        <p>Wednesday Bible Study: 7:00 PM</p>
+      </div>
+      <div>
+        <h3 class="font-serif text-xl mb-4">Contact Us</h3>
+        <p>123 Church Street</p>
+        <p>Anytown, ST 12345</p>
+        <p>Phone: (555) 123-4567</p>
+      </div>
+      <div>
+        <h3 class="font-serif text-xl mb-4">Connect</h3>
+        <div class="space-y-2">
+          <a href="#" class="block hover:text-church-gold">Facebook</a>
+          <a href="#" class="block hover:text-church-gold">Instagram</a>
+          <a href="#" class="block hover:text-church-gold">YouTube</a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 text-center border-t border-gray-600 pt-8">
+      <p>&copy; {currentYear} Grace Community Church. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
